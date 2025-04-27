@@ -83,8 +83,10 @@ export default function Home() {
   function decrementValue(index: number) {
     const newCards = [...cards];
 
-    // Verifique se o valor do card é um número antes de decrementá-lo
-    if (
+    // Se o valor for "X", definimos como 5 para poder diminuir
+    if (newCards[index].value === "X") {
+      newCards[index].value = 4; // Se o valor for "X", volta para 4
+    } else if (
       typeof newCards[index].value === "number" &&
       newCards[index].value > 0
     ) {
@@ -108,7 +110,9 @@ export default function Home() {
   function openEditModal(index: number) {
     setEditingCardIndex(index);
     setEditedName(cards[index].name);
-    setEditedValue(cards[index].value);
+
+    // Se o valor for "X", definimos o valor como 5 para poder diminuir
+    setEditedValue(cards[index].value === "X" ? 5 : cards[index].value);
     setIsEditModalOpen(true);
   }
 
